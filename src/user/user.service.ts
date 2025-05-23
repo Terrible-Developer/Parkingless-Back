@@ -23,4 +23,12 @@ export class UserService {
   remove(id: number) {
     return `This action removes a #${id} user`;
   }
+
+  userTest() {
+    return 'This is a user Test!';
+  }
+
+  userTestSingle(id: number) {
+    return `This test returns user #${id}`;
+  }
 }

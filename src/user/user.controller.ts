@@ -17,20 +17,24 @@ export class UserController {
     return this.userService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.userService.findOne(+id);
-  }
-
   /**
    * From the looks of it, this is calling the above get, findOne, not this.
    * Maybe because of the prefix, maybe something else, the important thing is that it's not working.
    */
   @Get('test')
   testReturn() {
-    return 'test';
+    return this.userService.userTest();
   }
 
+  @Get('test/:id')
+  testSingleReturn(@Param('id') id: string) {
+    return this.userService.userTestSingle(+id);
+  }
+
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.userService.findOne(+id);
+  }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {

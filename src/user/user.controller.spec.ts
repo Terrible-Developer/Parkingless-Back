@@ -17,4 +17,10 @@ describe('UserController', () => {
   it('should be defined', () => {
     expect(controller).toBeDefined();
   });
+
+  describe('/test', () => {
+    it('should return "This is a Test!"', () => {
+      expect(controller.testReturn()).toBe('This is a user Test!');
+    });
+  });
 });
