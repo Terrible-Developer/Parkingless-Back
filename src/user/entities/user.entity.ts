@@ -1,6 +1,7 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany, Unique } from 'typeorm';
 import { Car } from '../../car/entities/car.entity';
 @Entity()
+@Unique(["cpf"])
 export class User {
   @PrimaryGeneratedColumn()
   id: number;
