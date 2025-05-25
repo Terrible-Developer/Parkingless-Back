@@ -1,26 +1,25 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 import { Car } from '../../car/entities/car.entity';
-
 @Entity()
 export class User {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column()
-    primeiroNome: string;
+  @Column()
+  primeiroNome: string;
 
-    @Column()
-    sobrenome: string;
+  @Column()
+  sobrenome: string;
 
-    @Column()
-    cpf: string;
+  @Column()
+  cpf: string;
 
-    @Column()
-    senha: string;
+  @Column()
+  senha: string;
 
-    @Column({ default: true })
-    ativo: boolean;
+  @Column({ default: true })
+  ativo: boolean;
 
-    @OneToMany(() => Car, (car) => car.prop)
-    carro: Car;
+  @OneToMany(() => Car, (car) => car.prop)
+  carro: Car;
 }

@@ -1,17 +1,28 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { Public } from '../decorators';
 
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
+  @Public()
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
     return this.userService.create(createUserDto);
   }
 
+  @Public()
   @Get()
   findAll() {
     return this.userService.findAll();
@@ -49,10 +60,11 @@ export class UserController {
       return await this.userService.remove(this.findOne(user));
 
     }*/
-    const user = await this.findOne(+id).then(user => { return user });
+    const user = await this.findOne(+id).then((user) => {
+      return user;
+    });
 
-    if(user)
-      return await this.userService.remove(user);
+    if (user) return await this.userService.remove(user);
     return null;
   }
 }

@@ -11,7 +11,7 @@ export class UserService {
   constructor(
     @InjectRepository(User)
     private userRepository: Repository<User>,
-    private dataSource: DataSource
+    private dataSource: DataSource,
   ) {}
 
   async create(userDto: CreateUserDto) {
@@ -34,7 +34,7 @@ export class UserService {
         sobrenome: userDto.sobrenome,
         cpf: userDto.cpf,
         senha: userDto.senha,
-        ativo: true
+        ativo: true,
       });
 
       console.log('DEBUG ', user);
@@ -60,7 +60,6 @@ export class UserService {
    */
   async addCarToUser(car: Car) {
     //TODO adicionar lógica de adição ao banco
-
   }
 
   findAll(): Promise<User[]> {
@@ -71,6 +70,10 @@ export class UserService {
   findOne(id: number): Promise<User | null> {
     console.log('DEBUG: ', process.env.DATABASE_NAME);
     return this.userRepository.findOneBy({ id });
+  }
+
+  async findByCpf(cpf: string): Promise<User | null> {
+    return this.userRepository.findOneBy({ cpf });
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
