@@ -34,9 +34,10 @@ export class UserService {
         sobrenome: userDto.sobrenome,
         cpf: userDto.cpf,
         senha: userDto.senha,
-        ativo: userDto.ativo
+        ativo: true
       });
 
+      console.log('DEBUG ', user);
       await queryRunner.manager.save(user);
 
       await queryRunner.commitTransaction();
