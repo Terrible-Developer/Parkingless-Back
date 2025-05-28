@@ -61,7 +61,6 @@ function validateDigits(cpf:string): boolean {
 
     digits += secondDigit.toString();
 
-    console.log(`DEBUG// digits: ${digits} | cpf: ${cpf} | formatted cpf: ${formattedCpf}`);
     if (digits == formattedCpf){
         return true;
     }
