@@ -33,7 +33,6 @@ export class UserController {
     return this.userService.findOne(+id);
   }
 
-  @Public()
   @Patch(':id')
   async update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     await this.findOne(+id).then((user) => {
@@ -44,7 +43,6 @@ export class UserController {
     });
   }
 
-  @Public()
   @Delete(':id')
   async remove(@Param('id') id: number) {
     //return this.userService.remove(+id);
