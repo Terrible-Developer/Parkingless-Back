@@ -28,30 +28,23 @@ export class UserController {
     return this.userService.findAll();
   }
 
-  /**
-   * From the looks of it, this is calling the above get, findOne, not this.
-   * Maybe because of the prefix, maybe something else, the important thing is that it's not working.
-   */
-  @Get('test')
-  testReturn() {
-    return this.userService.userTest();
-  }
-
-  @Get('test/:id')
-  testSingleReturn(@Param('id') id: string) {
-    return this.userService.userTestSingle(+id);
-  }
-
   @Get(':id')
   findOne(@Param('id') id: number) {
     return this.userService.findOne(+id);
   }
 
+  @Public()
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.userService.update(+id, updateUserDto);
+  async update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
+    await this.findOne(+id).then((user) => {
+      if(user){
+        return this.userService.update(+id, updateUserDto);
+      }
+      return null;
+    });
   }
 
+  @Public()
   @Delete(':id')
   async remove(@Param('id') id: number) {
     //return this.userService.remove(+id);

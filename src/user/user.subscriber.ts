@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { DataSource, EntitySubscriberInterface, InsertEvent } from 'typeorm';
+import { DataSource, EntitySubscriberInterface, InsertEvent, UpdateEvent } from 'typeorm';
 import { User } from './entities/user.entity';
 import { BcryptService } from '../services/bcrypt.service';
 
@@ -16,6 +16,7 @@ export class UserSubscriber implements EntitySubscriberInterface<User> {
   }
 
   async beforeInsert(event: InsertEvent<User>) {
+    console.log("DEBUG: testando update de senha | ", event.entity.senha);
     if (event.entity.senha) {
       try {
         event.entity.senha = await this.bcryptService.hashPassword(
@@ -27,4 +28,18 @@ export class UserSubscriber implements EntitySubscriberInterface<User> {
       }
     }
   }
+
+  async beforeUpdate(event: UpdateEvent<User>) {
+    if (event.entity!.senha) {
+      try {
+        event.entity!.senha = await this.bcryptService.hashPassword(
+          event.entity!.senha,
+        );
+      } catch (error) {
+        console.error('Hash error:', error);
+        throw error;
+      }
+    }
+  }
+
 }
