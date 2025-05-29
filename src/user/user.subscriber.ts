@@ -16,7 +16,6 @@ export class UserSubscriber implements EntitySubscriberInterface<User> {
   }
 
   async beforeInsert(event: InsertEvent<User>) {
-    console.log("DEBUG: testando update de senha | ", event.entity.senha);
     if (event.entity.senha) {
       try {
         event.entity.senha = await this.bcryptService.hashPassword(

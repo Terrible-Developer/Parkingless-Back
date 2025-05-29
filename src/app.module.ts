@@ -7,6 +7,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { User } from './user/entities/user.entity';
 import { Car } from './car/entities/car.entity';
+import { CarModule } from './car/car.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { Car } from './car/entities/car.entity';
       envFilePath: '.env',
     }),
     UserModule,
+    CarModule,
     AuthModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
@@ -25,7 +27,7 @@ import { Car } from './car/entities/car.entity';
       database: process.env.DATABASE_NAME || 'postgres',
       entities: [User, Car],
       logging: true,
-      synchronize: true, //Opção que "reincia" o banco ao rodar o app. Uso apenas para desenvolvimento e debugging, e nunca deve ser usada em produção
+      synchronize: false, //Opção que "reincia" o banco ao rodar o app. Uso apenas para desenvolvimento e debugging, e nunca deve ser usada em produção
     }),
   ],
   controllers: [AppController],

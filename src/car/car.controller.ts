@@ -2,21 +2,25 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { CarService } from './car.service';
 import { CreateCarDto } from './dto/create-car.dto';
 import { UpdateCarDto } from './dto/update-car.dto';
+import { Public } from 'src/decorators';
 
 @Controller('car')
 export class CarController {
   constructor(private readonly carService: CarService) {}
 
+  @Public()
   @Post()
   create(@Body() createCarDto: CreateCarDto) {
     return this.carService.create(createCarDto);
   }
 
+  @Public()
   @Get()
   findAll() {
     return this.carService.findAll();
   }
 
+  @Public()
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.carService.findOne(+id);

@@ -5,6 +5,8 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 import { Car } from '../car/entities/car.entity';
+import { CarService } from 'src/car/car.service';
+import { CreateCarDto } from 'src/car/dto/create-car.dto';
 
 @Injectable()
 export class UserService {
@@ -12,6 +14,7 @@ export class UserService {
     @InjectRepository(User)
     private userRepository: Repository<User>,
     private dataSource: DataSource,
+    private carService: CarService
   ) {}
 
   async create(userDto: CreateUserDto): Promise<void> {
@@ -52,11 +55,9 @@ export class UserService {
     }
   }
 
-  /*
-   * Registra um carro ao usuário
-   */
-  async addCarToUser(car: Car) {
-    //TODO adicionar lógica de adição ao banco
+  async addCarToUser(user: User, createCarDto: CreateCarDto): Promise<void> {
+    createCarDto.prop = user;
+    this.carService.create(createCarDto);
   }
 
   findAll(): Promise<User[]> {

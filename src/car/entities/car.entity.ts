@@ -10,6 +10,9 @@ export class Car {
     placa: string;
 
     @Column()
+    fabricante: string;
+
+    @Column()
     modelo: string;
 
     @Column()

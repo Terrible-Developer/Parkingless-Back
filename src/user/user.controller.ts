@@ -11,6 +11,7 @@ import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { Public } from '../decorators';
+import { CreateCarDto } from 'src/car/dto/create-car.dto';
 
 @Controller('user')
 export class UserController {
@@ -20,6 +21,17 @@ export class UserController {
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
     return this.userService.create(createUserDto);
+  }
+
+  @Public()
+  @Post('addCar')
+  async addCar(@Body() createCarDto: CreateCarDto) {
+    await this.findOne(createCarDto.propId).then((user) => {
+      if(user){
+        return this.userService.addCarToUser(user, createCarDto);
+      }
+    });
+    return null;
   }
 
   @Public()
@@ -34,7 +46,7 @@ export class UserController {
   }
 
   @Patch(':id')
-  async update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
+  async update(@Param('id') id: number, @Body() updateUserDto: UpdateUserDto) {
     await this.findOne(+id).then((user) => {
       if(user){
         return this.userService.update(+id, updateUserDto);
@@ -55,7 +67,8 @@ export class UserController {
       return user;
     });
 
-    if (user) return await this.userService.remove(user);
+    if (user)
+      return await this.userService.remove(user);
     return null;
   }
 }

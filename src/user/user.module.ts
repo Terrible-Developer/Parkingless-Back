@@ -10,6 +10,7 @@ import { ConfigModule } from '@nestjs/config';
 import authConfig from '../config/auth.config';
 import { BcryptService } from '../services/bcrypt.service';
 import { UserSubscriber } from './user.subscriber';
+import { CarService } from 'src/car/car.service';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { UserSubscriber } from './user.subscriber';
   providers: [
     UserService,
     UserSubscriber,
+    CarService,
     BcryptService,
     {
       provide: 'APP_GUARD',
