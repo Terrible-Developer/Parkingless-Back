@@ -18,17 +18,17 @@ export class CityController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id') id: number) {
     return this.cityService.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCityDto: UpdateCityDto) {
+  update(@Param('id') id: number, @Body() updateCityDto: UpdateCityDto) {
     return this.cityService.update(+id, updateCityDto);
   }
 
   @Delete(':id')
-  async remove(@Param('id') id: string) {
+  async remove(@Param('id') id: number) {
 		const city = await this.findOne(+id).then((city) => {
 			return city;
 		});
