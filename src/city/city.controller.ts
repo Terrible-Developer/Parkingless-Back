@@ -2,21 +2,25 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { CityService } from './city.service';
 import { CreateCityDto } from './dto/create-city.dto';
 import { UpdateCityDto } from './dto/update-city.dto';
+import { Public } from 'src/decorators';
 
 @Controller('city')
 export class CityController {
   constructor(private readonly cityService: CityService) {}
 
+  @Public()
   @Post()
   create(@Body() createCityDto: CreateCityDto) {
     return this.cityService.create(createCityDto);
   }
 
+  @Public()
   @Get()
   findAll() {
     return this.cityService.findAll();
   }
 
+  @Public()
   @Get(':id')
   findOne(@Param('id') id: number) {
     return this.cityService.findOne(+id);

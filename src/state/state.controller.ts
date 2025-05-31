@@ -2,16 +2,19 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { StateService } from './state.service';
 import { CreateStateDto } from './dto/create-state.dto';
 import { UpdateStateDto } from './dto/update-state.dto';
+import { Public } from 'src/decorators';
 
 @Controller('state')
 export class StateController {
   constructor(private readonly stateService: StateService) {}
 
+  @Public()
   @Post()
   create(@Body() createStateDto: CreateStateDto) {
     return this.stateService.create(createStateDto);
   }
 
+  @Public()
   @Get()
   findAll() {
     return this.stateService.findAll();

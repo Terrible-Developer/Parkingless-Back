@@ -33,11 +33,11 @@ export class StateService {
 
   }
 
-  findAll() {
+  findAll(): Promise<State[]> {
 		return this.stateRepository.find();
   }
 
-  findOne(id: number) {
+  findOne(id: number): Promise<State | null> {
 		return this.stateRepository.findOneBy({ id });
   }
 

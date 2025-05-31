@@ -1,14 +1,16 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { User } from './user/entities/user.entity';
+import { UserModule } from './user/user.module';
 import { Car } from './car/entities/car.entity';
 import { CarModule } from './car/car.module';
+import { State } from './state/entities/state.entity';
 import { StateModule } from './state/state.module';
+import { City } from './city/entities/city.entity';
 import { CityModule } from './city/city.module';
 
 @Module({
@@ -20,6 +22,8 @@ import { CityModule } from './city/city.module';
     UserModule,
     CarModule,
     AuthModule,
+    StateModule,
+    CityModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'localhost',
@@ -27,12 +31,10 @@ import { CityModule } from './city/city.module';
       username: process.env.DATABASE_USER,
       password: process.env.DATABASE_PASSWORD,
       database: process.env.DATABASE_NAME || 'Parkingless',
-      entities: [User, Car],
+      entities: [User, Car, State, City],
       logging: true,
-      synchronize: false, //Opção que "reincia" o banco ao rodar o app. Uso apenas para desenvolvimento e debugging, e nunca deve ser usada em produção
+      synchronize: true, //Opção que sincroniza o banco, criando relações não existentes e similares. Usado apenas para desenvolvimento, deve ser desligado para produção
     }),
-    StateModule,
-    CityModule,
   ],
   controllers: [AppController],
   providers: [AppService],
