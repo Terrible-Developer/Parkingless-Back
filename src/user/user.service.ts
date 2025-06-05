@@ -55,8 +55,7 @@ export class UserService {
     }
   }
 
-  async addCarToUser(user: User, createCarDto: CreateCarDto): Promise<void> {
-    createCarDto.prop = user;
+  async addCarToUser(createCarDto: CreateCarDto): Promise<void> {
     this.carService.create(createCarDto);
   }
 

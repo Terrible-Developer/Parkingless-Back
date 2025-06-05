@@ -4,7 +4,6 @@ import { UpdateCarDto } from './dto/update-car.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DataSource, Repository, UpdateResult } from 'typeorm';
 import { Car } from './entities/car.entity';
-import { User } from '../user/entities/user.entity';
 
 @Injectable()
 export class CarService {

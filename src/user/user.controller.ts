@@ -26,12 +26,7 @@ export class UserController {
   @Public()
   @Post('addCar')
   async addCar(@Body() createCarDto: CreateCarDto) {
-    await this.findOne(createCarDto.propId).then((user) => {
-      if(user){
-        return this.userService.addCarToUser(user, createCarDto);
-      }
-    });
-    return null;
+		return this.userService.addCarToUser(createCarDto);
   }
 
   @Public()
