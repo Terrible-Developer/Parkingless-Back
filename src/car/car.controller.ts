@@ -28,17 +28,23 @@ export class CarController {
 
   @Public()
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id') id: number) {
     return this.carService.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCarDto: UpdateCarDto) {
+  update(@Param('id') id: number, @Body() updateCarDto: UpdateCarDto) {
     return this.carService.update(+id, updateCarDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.carService.remove(+id);
+  async remove(@Param('id') id: number) {
+		const car = await this.findOne(+id).then((car) => {
+			return car;
+		});
+
+		if (car)
+			return await this.carService.remove(car);
+		return null;
   }
 }

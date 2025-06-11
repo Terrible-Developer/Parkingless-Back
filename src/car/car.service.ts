@@ -71,8 +71,8 @@ export class CarService {
     });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} car`;
+  async remove(car: Car) {
+		await this.carRepository.remove(car);
   }
 
 	async validatePlateFormat(plate: string): Promise<boolean> {

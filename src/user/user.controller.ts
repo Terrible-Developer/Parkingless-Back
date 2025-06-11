@@ -52,12 +52,9 @@ export class UserController {
 
   @Delete(':id')
   async remove(@Param('id') id: number) {
-    //return this.userService.remove(+id);
-    /*if(await this.userService.findOne(+id)) user => {
-
-      return await this.userService.remove(this.findOne(user));
-
-    }*/
+		/*
+		 * #TODO Quando um usuário for removido, remover todos os carros registrados à ele
+		 */
     const user = await this.findOne(+id).then((user) => {
       return user;
     });
