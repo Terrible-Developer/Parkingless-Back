@@ -14,6 +14,12 @@ export class CarController {
     return this.carService.create(createCarDto);
   }
 
+	@Public()
+	@Post('plateFormat')
+	plateFormat(@Body() plate: string) {
+		return this.carService.validatePlateFormat(plate);
+	}
+
   @Public()
   @Get()
   findAll() {

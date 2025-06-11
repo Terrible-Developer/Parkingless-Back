@@ -4,7 +4,6 @@ import { DataSource, Repository, UpdateResult } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
-import { Car } from '../car/entities/car.entity';
 import { CarService } from 'src/car/car.service';
 import { CreateCarDto } from 'src/car/dto/create-car.dto';
 
