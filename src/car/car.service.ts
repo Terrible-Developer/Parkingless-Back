@@ -80,5 +80,11 @@ export class CarService {
 			return true;
 		}
 		return false;
+		/*
+		 * Ponto relevante, existem APIs de validação de informações, não só o formato. Seria um conceito interessante, mas aparentemente, a do Paraná é restrita.
+		 * Deixo os links aqui para qualquer caso:
+		 * API Paraná: https://www.detran.pr.gov.br/Pagina/Frotista
+		 * API São Paulo: https://integrador.sp.gov.br/wps/portal/integrador/catalogoApis/API/detran-veiculos
+		 */
 	}
 }

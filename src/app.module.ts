@@ -12,6 +12,7 @@ import { State } from './state/entities/state.entity';
 import { StateModule } from './state/state.module';
 import { City } from './city/entities/city.entity';
 import { CityModule } from './city/city.module';
+import { PaymentModule } from './payment/payment.module';
 
 @Module({
   imports: [
@@ -35,6 +36,7 @@ import { CityModule } from './city/city.module';
       logging: true,
       synchronize: true, //Opção que sincroniza o banco, criando relações não existentes e similares. Usado apenas para desenvolvimento, deve ser desligado para produção
     }),
+    PaymentModule,
   ],
   controllers: [AppController],
   providers: [AppService],
